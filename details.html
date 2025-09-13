@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AzizMovie - Details</title>
+    <link rel="icon" href="img/ChatGPT Image Sep 13, 2025, 10_51_35 AM.png" />
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .video-player-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+            background-color: black;
+        }
+
+        .video-player-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .content-details {
+            padding: 20px;
+        }
+
+        .episode-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .episode-list li {
+            background-color: #333;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .episode-list li button {
+            background-color: #e50914;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .episode-list li button:hover {
+            background-color: #ff2a2a;
+        }
+
+        .episode-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px; 
+        }
+
+        @media (min-width: 768px) {
+            .episode-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="index.html" style="color: #e50914; text-decoration: none;">AzizMovie</a></h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="content-details">
+            <h2 id="content-title"></h2>
+            <div class="video-player-container">
+                <video id="video-player" controls autoplay></video>
+                <button id="fullscreen-btn" class="video-control-button"></button>
+                <button id="close-player-btn" class="video-control-button video-close-button">&times;</button>
+            </div>
+            <p id="content-description"></p>
+
+            <div id="series-episodes" style="display:none;">
+                <h3>Episodes</h3>
+                <ul id="episode-list" class="episode-list">
+                    
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 AzizMovie. Azizbek Mavlonov Himoyasida.</p>
+    </footer>
+
+    <script src="js/details.js"></script>
+</body>
+</html>

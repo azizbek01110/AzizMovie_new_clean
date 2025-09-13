@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel - AzizMovie</title>
+    <link rel="icon" href="img/ChatGPT Image Sep 13, 2025, 10_51_35 AM.png" />
+    <link rel="stylesheet" href="css/admin.css" />
+  </head>
+  <body>
+    <div class="admin-container">
+      <h1>Admin Panel</h1>
+      <div id="login-form">
+        <input type="password" id="admin-password" placeholder="Password" />
+        <button id="login-button">Login</button>
+        <p id="login-message"></p>
+      </div>
+      <div id="admin-content" style="display: none">
+        <h2>Add New Movie/Series</h2>
+        <form id="add-movie-form" enctype="multipart/form-data">
+          <label for="title">Title:</label>
+          <input type="text" id="title" required /><br />
+          <label for="description">Description:</label>
+          <textarea id="description"></textarea><br />
+          <label for="imageUrl">Image File:</label>
+          <input type="file" id="imageUrl" accept="image/*" /><br />
+          <label for="videoUrl"
+            >Video File (for single movie/first episode):</label
+          >
+          <input type="file" id="videoUrl" accept="video/*" /><br />
+          <label for="isSeries">Is Series?</label>
+          <input type="checkbox" id="isSeries" /><br />
+          <div id="episode-fields" style="display: none">
+            <h3>Episodes</h3>
+            <button type="button" id="add-episode">Add Episode</button>
+            <div id="episodes-container"></div>
+          </div>
+          <button type="submit">Add Content</button>
+        </form>
+
+        <h2>Manage Content</h2>
+        <ul id="content-list"></ul>
+        <button id="logout-button">Logout</button>
+        <a href="index.html" class="home-button">Home</a>
+      </div>
+    </div>
+    <script src="js/admin.js"></script>
+  </body>
+</html>
