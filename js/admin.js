@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <label>Episode ${episodeCount} Title:</label>
             <input type="text" class="episode-title" placeholder="Episode Title">
             <label>Episode ${episodeCount} Video File:</label>
-            <input type="file" class="episode-url" accept="video/*">
+            <input type="file" class="episode-url" name="files" accept="video/*">
             <button type="button" class="remove-episode-button">Remove</button>
         `;
         episodesContainer.appendChild(episodeDiv);
