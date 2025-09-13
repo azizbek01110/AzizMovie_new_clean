@@ -49,6 +49,14 @@
       "dest": "/img/$1"
     },
     {
+      "src": "/admin.html",
+      "dest": "/admin.html"
+    },
+    {
+      "src": "/details.html",
+      "dest": "/details.html"
+    },
+    {
       "src": "/admin",
       "dest": "/admin.html"
     },
