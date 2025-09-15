@@ -25,6 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
         kinoContent = []; // Reset if corrupted
     }
 
+    // Cloudinary ma'lumotlari (Frontendda to'g'ridan-to'g'ri ishlatiladi)
+    const CLOUDINARY_CLOUD_NAME_FRONTEND = 'dynwbchcn'; // Sizning Cloud Name'ingiz
+    const CLOUDINARY_UPLOAD_PRESET = 'ml_default'; // Cloudinary da default upload preset (o'zgartirishingiz mumkin)
+
     function renderContentList() {
         contentList.innerHTML = '';
         kinoContent.forEach((item, index) => {
@@ -107,6 +111,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    const uploadFiles = async (files) => {
+        const uploadedUrls = [];
+
+        for (const file of files) {
+            if (!file) continue;
+
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+            formData.append('cloud_name', CLOUDINARY_CLOUD_NAME_FRONTEND);
+
+            try {
+                const response = await fetch(
+                    `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME_FRONTEND}/upload`,
+                    {
+                        method: 'POST',
+                        body: formData,
+                    }
+                );
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`Cloudinary API error! status: ${response.status}, message: ${errorData.error.message}`);
+                }
+
+                const data = await response.json();
+                uploadedUrls.push(data.secure_url);
+            } catch (error) {
+                console.error('Error uploading file to Cloudinary:', error);
+                throw new Error('Faylni Cloudinaryga yuklashda xatolik yuz berdi.');
+            }
+        }
+        return uploadedUrls;
+    };
+
     addMovieForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -119,30 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const imageFile = imageUrlInput.files[0];
         const videoFile = videoUrlInput.files[0];
-
-        const uploadFiles = async (files) => {
-            const formData = new FormData();
-            files.forEach(file => {
-                if (file) {
-                    formData.append('files', file);
-                }
-            });
-
-            if (files.filter(Boolean).length === 0) {
-                return [];
-            }
-
-            const response = await fetch('/api/upload', {
-                method: 'POST',
-                body: formData,
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const data = await response.json();
-            return data.urls;
-        };
 
         try {
             const [imageUrl, videoUrl] = await uploadFiles([imageFile, videoFile]);
